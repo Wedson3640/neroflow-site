@@ -6,6 +6,7 @@
 <title>EmitNF-e — Consulta Rápida, Fácil e Segura de NFS-e</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -757,22 +758,22 @@ footer{background:var(--dark);color:white;padding:60px 5% 30px}
       </div>
     </div>
     <div class="contact-form fade-in">
-      <form onsubmit="submitContact(event)">
+      <form onsubmit="submitContact(event)" id="contactForm">
         <div class="form-group">
           <label>Nome completo</label>
-          <input type="text" placeholder="Seu nome" required/>
+          <input id="c-nome" type="text" placeholder="Seu nome" required/>
         </div>
         <div class="form-group">
           <label>E-mail</label>
-          <input type="email" placeholder="seu@email.com" required/>
+          <input id="c-email" type="email" placeholder="seu@email.com" required/>
         </div>
         <div class="form-group">
           <label>Empresa</label>
-          <input type="text" placeholder="Nome da empresa"/>
+          <input id="c-empresa" type="text" placeholder="Nome da empresa"/>
         </div>
         <div class="form-group">
           <label>Mensagem</label>
-          <textarea placeholder="Como podemos ajudar?" required></textarea>
+          <textarea id="c-mensagem" placeholder="Como podemos ajudar?" required></textarea>
         </div>
         <button type="submit" class="btn-submit">Falar com especialista →</button>
       </form>
@@ -845,22 +846,54 @@ function selectFeature(el, title, desc) {
   document.getElementById('featureDesc').textContent = desc;
 }
 
+// Supabase
+const _sb = supabase.createClient(
+  'https://bopzwaycxebpmpwwmohb.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJvcHp3YXljeGVicG1wd3dtb2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MzI3MjIsImV4cCI6MjA5MTUwODcyMn0.NE_Raov6zv8DaIOnUuIQwFsIvRrZBAbOMByLW9bAjMU'
+);
+
 // Contact form
-function submitContact(e) {
+async function submitContact(e) {
   e.preventDefault();
   const btn = e.target.querySelector('button');
+
+  const nome     = document.getElementById('c-nome').value.trim();
+  const email    = document.getElementById('c-email').value.trim();
+  const empresa  = document.getElementById('c-empresa').value.trim();
+  const mensagem = document.getElementById('c-mensagem').value.trim();
+
   btn.textContent = 'Enviando...';
   btn.disabled = true;
-  setTimeout(() => {
-    btn.textContent = '✓ Mensagem enviada!';
-    btn.style.background = '#16A34A';
+
+  // Salvar no Supabase
+  const { error } = await _sb.from('contatos').insert({ nome, email, empresa, mensagem });
+
+  if (error) {
+    btn.textContent = 'Erro ao enviar. Tente novamente.';
+    btn.style.background = '#DC2626';
+    btn.disabled = false;
     setTimeout(() => {
       btn.textContent = 'Falar com especialista →';
       btn.style.background = '';
-      btn.disabled = false;
-      e.target.reset();
     }, 3000);
-  }, 1200);
+    return;
+  }
+
+  // Abrir WhatsApp com mensagem preenchida
+  const texto = `📋 *Novo contato via site EmitNF-e*\n\n👤 *Nome:* ${nome}\n📧 *E-mail:* ${email}\n🏢 *Empresa:* ${empresa || 'Não informada'}\n💬 *Mensagem:* ${mensagem}\n\n---\nEmitNF-e | emitnfe.online`;
+  const url = `https://wa.me/5586988184548?text=${encodeURIComponent(texto)}`;
+  window.open(url, '_blank');
+
+  // Feedback de sucesso
+  btn.textContent = '✓ Mensagem enviada!';
+  btn.style.background = '#16A34A';
+  e.target.reset();
+
+  setTimeout(() => {
+    btn.textContent = 'Falar com especialista →';
+    btn.style.background = '';
+    btn.disabled = false;
+  }, 3000);
 }
 
 // Hamburger
