@@ -889,7 +889,7 @@ async function submitContact(e) {
   }
 
   // Abrir WhatsApp com mensagem preenchida
-  const texto = `📋 *Novo contato via site EmitNF-e*\n\n👤 *Nome:* ${nome}\n📧 *E-mail:* ${email}\n🏢 *Empresa:* ${empresa || 'Não informada'}\n💬 *Mensagem:* ${mensagem}\n\n---\nEmitNF-e | emitnfe.online`;
+  const texto = `*Novo contato via site EmitNF-e*\n\n*Nome:* ${nome}\n*E-mail:* ${email}\n*Empresa:* ${empresa || 'Nao informada'}\n*Mensagem:* ${mensagem}\n\n---\nEmitNF-e | emitnfe.online`;
   const url = `https://wa.me/5586988184548?text=${encodeURIComponent(texto)}`;
   window.open(url, '_blank');
 
