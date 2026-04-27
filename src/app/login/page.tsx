@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -11,7 +11,7 @@ interface LoginForm {
   password: string;
 }
 
-export default function LoginPage() {
+function LoginContent() {
   const { login } = useAuth();
   const router       = useRouter();
   const searchParams = useSearchParams();
@@ -138,10 +138,18 @@ export default function LoginPage() {
           </form>
 
           <p className="text-center text-xs text-slate-400 mt-8">
-            © {new Date().getFullYear()} EmitNFe · Todos os direitos reservados
+            © {new Date().getFullYear()} Neroflow · Todos os direitos reservados
           </p>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-brand-600" /></div>}>
+      <LoginContent />
+    </Suspense>
   );
 }
