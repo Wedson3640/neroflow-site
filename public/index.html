@@ -398,6 +398,26 @@ nav{display:flex;align-items:center;justify-content:space-between;height:68px}
   border-radius:8px;border:1px solid rgba(37,99,235,.1);
 }
 
+/* ── TESTIMONIALS ────────────────────────────────── */
+.testimonials{padding:80px 5%;background:var(--white)}
+.testimonials-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:24px;margin-top:48px;
+}
+.testimonial-card{
+  background:var(--white);border:1px solid var(--gray2);
+  border-radius:16px;padding:28px 24px;
+  display:flex;flex-direction:column;gap:16px;
+  box-shadow:var(--shadow);transition:.2s;
+}
+.testimonial-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.1);transform:translateY(-2px)}
+.testimonial-stars{display:flex;gap:3px;font-size:1.1rem;color:#F59E0B}
+.testimonial-text{font-size:.9rem;color:var(--text2);line-height:1.7;flex:1;font-style:italic}
+.testimonial-author{border-top:1px solid var(--gray2);padding-top:14px;margin-top:4px}
+.testimonial-author strong{display:block;font-size:.9rem;font-weight:700;color:var(--dark)}
+.testimonial-author span{font-size:.8rem;color:var(--text3)}
+@media(max-width:900px){.testimonials-grid{grid-template-columns:1fr}}
+
 /* ── FOOTER ──────────────────────────────────────── */
 footer{background:var(--dark);color:white;padding:60px 5% 30px}
 .footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
@@ -739,6 +759,39 @@ footer{background:var(--dark);color:white;padding:60px 5% 30px}
         <li>Onboarding dedicado</li>
       </ul>
       <a href="/cadastro.html" class="btn-plan btn-plan-outline">Assinar agora</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-header fade-in">
+    <h2 class="section-title">Empresas que confiam no Neroflow</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-in">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"O Neroflow mudou nossa rotina. Automatizamos 100% das consultas e ganhamos horas todos os dias."</p>
+      <div class="testimonial-author">
+        <strong>Carlos Mendes</strong>
+        <span>Contador</span>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Interface intuitiva e suporte excelente. Recomendo para qualquer empresa que quer organização fiscal de verdade."</p>
+      <div class="testimonial-author">
+        <strong>Juliana Ferreira</strong>
+        <span>Financeiro</span>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Conseguimos centralizar todas as empresas em um só lugar. Mais controle e menos retrabalho."</p>
+      <div class="testimonial-author">
+        <strong>Ricardo Santos</strong>
+        <span>CEO</span>
+      </div>
     </div>
   </div>
 </section>
