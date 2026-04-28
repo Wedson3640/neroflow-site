@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/udpl1652/whatsapp-api-free/**)",
+      "Read(//c/Users/udpl1652/whatsapp-api-free/src/**)"
+    ]
+  }
+}
