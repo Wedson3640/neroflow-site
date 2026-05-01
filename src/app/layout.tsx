@@ -4,7 +4,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "EmitNFe — Gestão de NFS-e",
+  title: "Neroflow — Gestão de NFS-e",
   description: "Sistema profissional de gestão de Notas Fiscais de Serviço",
 };
 

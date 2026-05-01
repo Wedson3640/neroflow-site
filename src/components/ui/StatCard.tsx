@@ -21,14 +21,14 @@ const COLORS = {
 export default function StatCard({ title, value, subtitle, icon: Icon, color = "blue", trend }: StatCardProps) {
   const c = COLORS[color];
   return (
-    <div className="card flex items-start gap-4">
-      <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center shrink-0", c.icon)}>
-        <Icon className="w-6 h-6" />
+    <div className="card flex items-center gap-3 py-3">
+      <div className={cn("w-9 h-9 rounded-lg flex items-center justify-center shrink-0", c.icon)}>
+        <Icon className="w-5 h-5" />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm text-slate-500 font-medium">{title}</p>
-        <p className={cn("text-2xl font-bold mt-0.5 truncate", c.val)}>{value}</p>
-        {subtitle && <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>}
+        <p className="text-xs text-slate-500 font-medium">{title}</p>
+        <p className={cn("text-xl font-bold leading-tight truncate", c.val)}>{value}</p>
+        {subtitle && <p className="text-[11px] text-slate-400 leading-tight">{subtitle}</p>}
         {trend && (
           <div className={cn(
             "inline-flex items-center gap-1 text-xs font-medium mt-1 px-1.5 py-0.5 rounded",

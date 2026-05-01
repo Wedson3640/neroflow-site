@@ -4,8 +4,10 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Cadastro — Neroflow</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="/logo N da neroflow2.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin/>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"/></noscript>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -23,8 +25,7 @@ body{font-family:'Inter',sans-serif;color:var(--text);min-height:100vh;display:f
 header{background:white;border-bottom:1px solid var(--gray2);padding:0 5%}
 nav{display:flex;align-items:center;justify-content:space-between;height:64px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-icon{width:34px;height:34px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center}
-.logo-icon svg{width:18px;height:18px;fill:white}
+.logo-img{height:38px;width:auto;display:block;max-width:160px;object-fit:contain}
 .logo-text strong{font-size:.9rem;font-weight:800;color:var(--dark)}
 .logo-text span{display:block;font-size:.63rem;color:var(--gray3)}
 .nav-right{font-size:.875rem;color:var(--text3)}
@@ -156,6 +157,43 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
 .radio-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--gray2);flex-shrink:0;transition:.2s}
 .radio-option.selected .radio-dot{border-color:var(--blue);background:var(--blue)}
 
+/* ── PERIODO SYNC ─────────── */
+.periodo-selector{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.periodo-option{
+  border:1.5px solid var(--gray2);border-radius:9px;padding:12px 16px;
+  cursor:pointer;display:flex;align-items:flex-start;gap:12px;transition:.2s;
+}
+.periodo-option:hover{border-color:var(--blue);background:var(--blue-light)}
+.periodo-option.selected{border-color:var(--blue);background:var(--blue-light)}
+.periodo-radio{
+  width:16px;height:16px;border-radius:50%;border:2px solid var(--gray2);
+  flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:.2s;
+}
+.periodo-option.selected .periodo-radio{border-color:var(--blue)}
+.periodo-option.selected .periodo-radio::after{
+  content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);
+}
+.periodo-info{flex:1}
+.periodo-label{font-size:.875rem;font-weight:600;color:var(--dark)}
+.periodo-sub{font-size:.75rem;color:var(--text3);margin-top:2px}
+.periodo-warn{
+  display:flex;align-items:flex-start;gap:6px;margin-top:6px;
+  background:#FEF9C3;border:1px solid #FDE047;border-radius:6px;padding:6px 10px;
+  font-size:.75rem;color:#713F12;
+}
+.periodo-custom-date{
+  margin-top:10px;display:none;
+}
+.periodo-custom-date input{
+  width:100%;padding:10px 14px;border:1.5px solid var(--gray2);
+  border-radius:9px;font-size:.875rem;font-family:inherit;color:var(--text);outline:none;
+}
+.periodo-custom-date input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
+.periodo-rec{
+  font-size:.65rem;font-weight:700;background:var(--green);color:white;
+  padding:2px 7px;border-radius:10px;margin-left:8px;vertical-align:middle;
+}
+
 /* ── CHECKBOX ─────────── */
 .checkbox-wrap{display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-bottom:8px}
 .checkbox-wrap input[type=checkbox]{
@@ -225,10 +263,9 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
 <header>
   <nav>
     <a href="/" class="logo">
-      <div class="logo-icon"><img src="/logo N da neroflow2.png" alt="Neroflow" style="width:28px;height:28px;object-fit:contain"/></div>
-      <div class="logo-text"><strong>Neroflow</strong><span>Automação de Notas Fiscais</span></div>
+      <img src="/log nero flow sem fundo.png" alt="Neroflow" class="logo-img" width="160" height="38" loading="eager" decoding="async">
     </a>
-    <div class="nav-right">Já tem conta? <a href="https://app.emitnfe.online/login">Entrar</a></div>
+    <div class="nav-right">Já tem conta? <a href="https://app.neroflow.com.br/login">Entrar</a></div>
   </nav>
 </header>
 
@@ -266,7 +303,7 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
         <div class="form-card-header">
           <div class="form-step-badge">Etapa 1 de 3</div>
           <h2>Crie sua conta e comece agora</h2>
-          <p>⚡ Leva menos de 2 minutos. Cancele quando quiser.</p>
+          <p>🎁 <strong>7 dias grátis</strong>, sem cartão. Cancele quando quiser.</p>
         </div>
         <div class="form-body">
           <div class="form-group" style="margin-bottom:20px">
@@ -348,31 +385,38 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
           <p>Você pode mudar de plano a qualquer momento, sem fidelidade.</p>
         </div>
         <div class="form-body">
+          <div style="background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:10px;padding:12px 16px;margin-bottom:18px;display:flex;align-items:center;gap:10px">
+            <span style="font-size:1.3rem">🎁</span>
+            <div>
+              <div style="font-size:.85rem;font-weight:700;color:#166534">7 dias grátis em qualquer plano</div>
+              <div style="font-size:.78rem;color:#15803D;margin-top:2px">Nenhuma cobrança nos primeiros 7 dias. Cancele antes e não paga nada.</div>
+            </div>
+          </div>
           <div class="plan-selector">
-            <div class="plan-option" id="plan-basico" onclick="selectPlan('basico')">
+            <div class="plan-option" id="plan-basico" onclick="selectPlan('BASIC')">
               <div class="plan-option-radio"></div>
               <div class="plan-option-info">
                 <div class="plan-option-name">Básico</div>
                 <div class="plan-option-desc">Até 50 NFS-e/mês · 1 certificado digital</div>
               </div>
-              <div class="plan-option-price">R$ 79/mês</div>
+              <div style="text-align:right"><div style="font-size:.72rem;font-weight:600;color:#22C55E">7 dias grátis</div><div class="plan-option-price">R$ 49,90/mês</div></div>
             </div>
-            <div class="plan-option selected" id="plan-pro" onclick="selectPlan('pro')">
+            <div class="plan-option selected" id="plan-pro" onclick="selectPlan('PRO')">
               <div class="plan-rec-badge">Recomendado</div>
               <div class="plan-option-radio"></div>
               <div class="plan-option-info">
                 <div class="plan-option-name">Profissional</div>
                 <div class="plan-option-desc">Até 500 NFS-e/mês · 3 certificados · API</div>
               </div>
-              <div class="plan-option-price">R$ 149/mês</div>
+              <div style="text-align:right"><div style="font-size:.72rem;font-weight:600;color:#22C55E">7 dias grátis</div><div class="plan-option-price">R$ 149/mês</div></div>
             </div>
-            <div class="plan-option" id="plan-empresa" onclick="selectPlan('empresa')">
+            <div class="plan-option" id="plan-empresa" onclick="selectPlan('ENTERPRISE')">
               <div class="plan-option-radio"></div>
               <div class="plan-option-info">
                 <div class="plan-option-name">Empresarial</div>
                 <div class="plan-option-desc">Ilimitado · Multi-CNPJ · Suporte 24/7</div>
               </div>
-              <div class="plan-option-price">R$ 299/mês</div>
+              <div style="text-align:right"><div style="font-size:.72rem;font-weight:600;color:#22C55E">7 dias grátis</div><div class="plan-option-price">R$ 299/mês</div></div>
             </div>
           </div>
 
@@ -393,7 +437,7 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
         <div class="form-card-header">
           <div class="form-step-badge">Etapa 3 de 3</div>
           <h2>Finalize seu cadastro</h2>
-          <p>Quase lá! Configure seus dados de acesso.</p>
+          <p>Quase lá! Crie sua senha e comece o <strong>teste grátis de 7 dias</strong>. Sem cobrança agora.</p>
         </div>
         <div class="form-body">
 
@@ -443,6 +487,55 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
             </div>
           </div>
 
+          <!-- Período de importação -->
+          <div class="form-group" style="margin-bottom:20px">
+            <label>A partir de quando deseja importar suas notas fiscais?</label>
+            <div class="periodo-selector" style="margin-top:10px">
+
+              <div class="periodo-option" id="per-30" onclick="selectPeriodo('30')">
+                <div class="periodo-radio"></div>
+                <div class="periodo-info">
+                  <div class="periodo-label">Últimos 30 dias</div>
+                </div>
+              </div>
+
+              <div class="periodo-option selected" id="per-90" onclick="selectPeriodo('90')">
+                <div class="periodo-radio"></div>
+                <div class="periodo-info">
+                  <div class="periodo-label">Últimos 90 dias <span class="periodo-rec">Recomendado</span></div>
+                </div>
+              </div>
+
+              <div class="periodo-option" id="per-365" onclick="selectPeriodo('365')">
+                <div class="periodo-radio"></div>
+                <div class="periodo-info">
+                  <div class="periodo-label">Últimos 12 meses</div>
+                </div>
+              </div>
+
+              <div class="periodo-option" id="per-custom" onclick="selectPeriodo('custom')">
+                <div class="periodo-radio"></div>
+                <div class="periodo-info">
+                  <div class="periodo-label">Data específica</div>
+                  <div class="periodo-custom-date" id="customDateWrap">
+                    <input type="date" id="dataInicioCustom" placeholder="dd/mm/aaaa"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="periodo-option" id="per-all" onclick="selectPeriodo('all')">
+                <div class="periodo-radio"></div>
+                <div class="periodo-info">
+                  <div class="periodo-label">Histórico completo</div>
+                  <div class="periodo-warn" id="warnHistorico" style="display:none">
+                    ⚠️ Pode levar horas para empresas com muitos anos de notas.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
           <div class="form-row">
             <div class="form-group">
               <label>Senha *</label>
@@ -463,7 +556,7 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
           </div>
 
           <!-- Password strength -->
-          <div style="margin:-8px 0 16px" id="passStrengthWrap" style="display:none">
+          <div id="passStrengthWrap" style="margin:-8px 0 16px;display:none">
             <div style="display:flex;gap:4px;margin-bottom:4px">
               <div id="ps1" style="height:3px;flex:1;border-radius:2px;background:var(--gray2)"></div>
               <div id="ps2" style="height:3px;flex:1;border-radius:2px;background:var(--gray2)"></div>
@@ -473,17 +566,23 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
             <div id="psLabel" style="font-size:.72rem;color:var(--text3)"></div>
           </div>
 
-          <div class="form-group">
-            <label class="checkbox-wrap">
-              <input type="checkbox" id="termos" required/>
-              <span>Aceito os <a href="#">termos de uso</a> e a <a href="#">política de privacidade</a> da Neroflow</span>
-            </label>
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;cursor:pointer"
+               onclick="toggleTermos(event)">
+            <div id="termosBox" style="
+              width:18px;height:18px;min-width:18px;border:2px solid #9CA3AF;
+              border-radius:4px;margin-top:1px;display:flex;align-items:center;
+              justify-content:center;background:white;transition:.15s;flex-shrink:0">
+            </div>
+            <input type="checkbox" id="termos" required style="display:none"/>
+            <span style="font-size:.84rem;color:#374151;line-height:1.5;font-weight:400;user-select:none">
+              Aceito os <a href="#" onclick="event.stopPropagation()">termos de uso</a> e a <a href="#" onclick="event.stopPropagation()">política de privacidade</a> da Neroflow
+            </span>
           </div>
 
           <div class="form-actions" style="margin-top:0">
             <button class="btn-back" onclick="goStep(2)">← Voltar</button>
           </div>
-          <button class="btn-final" id="btnFinal" onclick="submitForm()">Criar minha conta →</button>
+          <button class="btn-final" id="btnFinal" onclick="submitForm()">🎁 Começar teste grátis de 7 dias →</button>
         </div>
       </div>
 
@@ -491,9 +590,9 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
       <div class="step-panel" id="stepSuccess">
         <div class="success-wrap">
           <div class="success-icon">✅</div>
-          <h2>Conta criada com sucesso!</h2>
-          <p>Bem-vindo à Neroflow! Seu acesso foi configurado e está pronto para usar. Faça login para começar a gerenciar suas notas fiscais.</p>
-          <a href="https://app.emitnfe.online/login" class="btn-access">Acessar o sistema →</a>
+          <h2>Conta criada com sucesso! 🎉</h2>
+          <p>Bem-vindo à Neroflow! Seu <strong>teste grátis de 7 dias</strong> está ativo. Nenhuma cobrança será feita antes do fim do período. Faça login e comece agora.</p>
+          <a href="https://app.neroflow.com.br/login" class="btn-access">Acessar o sistema →</a>
         </div>
       </div>
 
@@ -510,11 +609,51 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
 </main>
 
 <script>
+// ── API ERROR ──────────────────────────────────────
+function showApiError() {
+  const existing = document.getElementById('apiErrorBanner');
+  if(existing) return;
+  const banner = document.createElement('div');
+  banner.id = 'apiErrorBanner';
+  banner.style.cssText = 'background:#FEF2F2;border:1.5px solid #FECACA;border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:flex-start;gap:12px';
+  banner.innerHTML = `
+    <span style="font-size:1.3rem;flex-shrink:0">⚠️</span>
+    <div>
+      <div style="font-size:.875rem;font-weight:700;color:#991B1B;margin-bottom:4px">Não foi possível concluir o cadastro agora</div>
+      <div style="font-size:.82rem;color:#B91C1C;line-height:1.5">Nosso sistema está em configuração. Tente novamente em alguns minutos ou fale conosco pelo WhatsApp para criar sua conta.</div>
+      <a href="https://wa.me/5586988184548?text=Olá, gostaria de criar minha conta na Neroflow" target="_blank"
+         style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:#22C55E;color:white;padding:8px 16px;border-radius:7px;font-size:.82rem;font-weight:700;text-decoration:none">
+        💬 Falar no WhatsApp
+      </a>
+    </div>`;
+  const formBody = document.querySelector('#step3 .form-body');
+  formBody.insertBefore(banner, formBody.firstChild);
+  banner.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+// ── TERMOS CHECKBOX ────────────────────────────────
+function toggleTermos(e) {
+  e.stopPropagation();
+  const cb  = document.getElementById('termos');
+  const box = document.getElementById('termosBox');
+  cb.checked = !cb.checked;
+  if (cb.checked) {
+    box.style.background     = '#2563EB';
+    box.style.borderColor    = '#2563EB';
+    box.innerHTML            = '<svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  } else {
+    box.style.background     = 'white';
+    box.style.borderColor    = '#9CA3AF';
+    box.innerHTML            = '';
+  }
+}
+
 // ── STATE ──────────────────────────────────────────
 let currentStep = 1;
 let tipoPessoa = 'pj';
-let planoSelecionado = 'pro';
+let planoSelecionado = 'PRO';
 const radios = {emite:'sim', cert:'sim', qt:'200'};
+let periodoSync = '90';
 
 // ── PROGRESS ───────────────────────────────────────
 function goStep(n) {
@@ -581,8 +720,9 @@ function selectType(t) {
 // ── PLAN SELECT ────────────────────────────────────
 function selectPlan(p) {
   planoSelecionado = p;
+  const map = {'BASIC':'basico','PRO':'pro','ENTERPRISE':'empresa'};
   ['basico','pro','empresa'].forEach(id => {
-    document.getElementById('plan-'+id).classList.toggle('selected', id===p);
+    document.getElementById('plan-'+id).classList.toggle('selected', map[p]===id);
   });
 }
 
@@ -654,6 +794,16 @@ function checkPassword() {
   lbl.textContent = v.length>0 ? 'Senha: '+labels[Math.max(0,score-1)] : '';
 }
 
+// ── PERIODO SYNC ───────────────────────────────────
+function selectPeriodo(p) {
+  periodoSync = p;
+  ['30','90','365','custom','all'].forEach(id => {
+    document.getElementById('per-'+id).classList.toggle('selected', id === p);
+  });
+  document.getElementById('customDateWrap').style.display  = p === 'custom' ? 'block' : 'none';
+  document.getElementById('warnHistorico').style.display   = p === 'all'    ? 'flex'  : 'none';
+}
+
 // ── SUBMIT ─────────────────────────────────────────
 async function submitForm() {
   if(!validateStep(3)) return;
@@ -681,12 +831,11 @@ async function submitForm() {
     })
   };
 
-  try {
-    // Integração Supabase via API
-    const API = window.location.origin.includes('localhost')
-      ? 'http://localhost:8000/api/v1'
-      : 'https://api.emitnfe.online/api/v1';
+  const API = window.location.origin.includes('localhost')
+    ? 'http://localhost:8000/api/v1'
+    : 'https://api.neroflow.com.br/api/v1';
 
+  try {
     const res = await fetch(`${API}/auth/register`, {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
@@ -694,17 +843,43 @@ async function submitForm() {
     });
 
     if(res.ok) {
+      const data = await res.json().catch(()=>({}));
+      // Dispara inicializar-sync se tiver certificate_id na resposta
+      if(data.certificate_id) {
+        const periodo_dias = periodoSync === 'all' ? null
+                           : periodoSync === 'custom' ? null
+                           : parseInt(periodoSync);
+        const data_inicio_custom = periodoSync === 'custom'
+          ? (document.getElementById('dataInicioCustom').value || null)
+          : null;
+        await fetch(`${API}/nfse/inicializar-sync`, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({
+            certificate_id: data.certificate_id,
+            periodo_dias,
+            data_inicio_custom
+          })
+        }).catch(e => console.warn('inicializar-sync falhou:', e));
+      } else {
+        // Salva preferência no localStorage para aplicar ao subir o certificado
+        localStorage.setItem('neroflow_sync_periodo', periodoSync);
+        if(periodoSync === 'custom') {
+          localStorage.setItem('neroflow_sync_data', document.getElementById('dataInicioCustom').value || '');
+        }
+      }
       showSuccess();
     } else {
       const err = await res.json().catch(()=>({detail:'Erro ao criar conta'}));
       alert(err.detail || 'Erro ao criar conta. Tente novamente.');
-      btn.innerHTML = 'Criar minha conta →';
+      btn.innerHTML = '🎁 Começar teste grátis de 7 dias →';
       btn.classList.remove('loading');
     }
   } catch(e) {
-    // Dev fallback — simula sucesso se API não disponível
-    console.warn('API indisponível, simulando cadastro:', payload);
-    setTimeout(showSuccess, 1500);
+    console.error('[Neroflow] submitForm error:', e);
+    showApiError();
+    btn.innerHTML = '🎁 Começar teste grátis de 7 dias →';
+    btn.classList.remove('loading');
   }
 }
 

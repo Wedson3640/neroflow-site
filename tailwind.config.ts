@@ -21,7 +21,7 @@ const config: Config = {
           800: "#1e40af",
           900: "#1e3a8a",
         },
-        sidebar: "#0f172a",
+        sidebar: "#f1f2f7",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

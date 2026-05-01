@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import {
   LayoutDashboard, FileText, Download, ShieldCheck,
   Settings, LogOut, ChevronRight,
@@ -21,23 +22,22 @@ export default function Sidebar() {
   const { user, logout } = useAuth();
 
   return (
-    <aside className="w-64 min-h-screen bg-sidebar flex flex-col fixed left-0 top-0 bottom-0 z-40">
+    <aside className="w-64 min-h-screen bg-sidebar flex flex-col fixed left-0 top-0 bottom-0 z-40 border-r border-slate-200">
       {/* Logo */}
-      <div className="px-5 py-6 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-brand-600 rounded-lg flex items-center justify-center shrink-0">
-            <FileText className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <div className="text-white font-bold text-base leading-none">EmitNFe</div>
-            <div className="text-slate-400 text-[11px] mt-0.5">Gestão de NFS-e</div>
-          </div>
-        </div>
+      <div className="px-5 py-5 border-b border-slate-200">
+        <Image
+          src="/log nero flow sem fundo.png"
+          alt="Neroflow"
+          width={150}
+          height={48}
+          className="object-contain"
+          priority
+        />
       </div>
 
       {/* Nav */}
       <nav className="flex-1 px-3 py-4 space-y-1">
-        <p className="px-3 text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-2">
+        <p className="px-3 text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-2">
           Menu
         </p>
         {NAV.map(({ href, label, icon: Icon }) => {
@@ -57,7 +57,7 @@ export default function Sidebar() {
       </nav>
 
       {/* User */}
-      <div className="px-3 py-4 border-t border-white/10">
+      <div className="px-3 py-4 border-t border-slate-200">
         <div className="flex items-center gap-3 px-3 py-2 mb-1">
           <div className="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center shrink-0">
             <span className="text-white text-xs font-bold">
@@ -65,10 +65,10 @@ export default function Sidebar() {
             </span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-white text-xs font-medium truncate">
+            <p className="text-slate-800 text-xs font-medium truncate">
               {user?.full_name || user?.email || "Usuário"}
             </p>
-            <p className="text-slate-400 text-[11px] truncate">{user?.email}</p>
+            <p className="text-slate-500 text-[11px] truncate">{user?.email}</p>
           </div>
         </div>
         <button onClick={logout} className="sidebar-link w-full mt-1">

@@ -44,7 +44,7 @@ function LoginContent() {
           <div className="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center">
             <FileText className="w-6 h-6 text-white" />
           </div>
-          <span className="text-white text-xl font-bold tracking-tight">EmitNFe</span>
+          <span className="text-white text-xl font-bold tracking-tight">Neroflow</span>
         </div>
 
         <div>
@@ -78,7 +78,7 @@ function LoginContent() {
             <div className="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center">
               <FileText className="w-6 h-6 text-white" />
             </div>
-            <span className="text-slate-900 text-xl font-bold">EmitNFe</span>
+            <span className="text-slate-900 text-xl font-bold">Neroflow</span>
           </div>
 
           <h2 className="text-2xl font-bold text-slate-900 mb-1">Entrar na conta</h2>

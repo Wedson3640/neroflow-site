@@ -1,0 +1,8 @@
+services:
+  neroflow-site:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - NEXT_PUBLIC_API_URL=https://api.neroflow.com.br
+    restart: unless-stopped
